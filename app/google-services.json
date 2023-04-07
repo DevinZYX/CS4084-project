@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1011573538945",
+    "project_id": "fir-auth-demo-5343a",
+    "storage_bucket": "fir-auth-demo-5343a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011573538945:android:cdadb33d027e4d20134d80",
+        "android_client_info": {
+          "package_name": "com.example.forum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011573538945-41o0ro4f4cqterf7e36d4u6itn0u9k4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQv-3K0uwvkB4RwcpbuNqEWyCyyHq6GXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011573538945-41o0ro4f4cqterf7e36d4u6itn0u9k4r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

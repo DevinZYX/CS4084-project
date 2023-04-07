@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupWindow"
+    android:layout_width="350dp"
+    android:layout_height="250dp"
+    android:layout_gravity="center"
+    android:background="@drawable/puwindow"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Make a Post"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/blue"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:hint="Please enter your post title"
+        android:textSize="12dp"
+        android:paddingTop="20dp"
+        android:layout_margin="5dp"
+        android:textColorHint="@color/background_gery"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Write your content here!"
+        android:inputType="text|textMultiLine"
+        android:lines="6"
+        android:background="@drawable/textarea"
+        android:gravity="start"
+        android:padding="7dp"
+        android:layout_margin="5dp"
+        android:textColorHint="@color/background_gery"
+        android:textSize="12dp" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        >
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/postbtn"
+            android:layout_marginRight="100dp"
+            android:text="Cancel"
+            android:textSize="10dp"/>
+
+        <Button
+            android:id="@+id/confirmBtn"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/postbtn"
+            android:layout_marginRight="5dp"
+            android:text="Confirm"
+            android:textSize="10dp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
