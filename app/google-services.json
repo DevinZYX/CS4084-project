@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1011573538945",
-    "project_id": "fir-auth-demo-5343a",
-    "storage_bucket": "fir-auth-demo-5343a.appspot.com"
+    "project_number": "525043231179",
+    "project_id": "cs4084-project-34cfb",
+    "storage_bucket": "cs4084-project-34cfb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1011573538945:android:cdadb33d027e4d20134d80",
+        "mobilesdk_app_id": "1:525043231179:android:7611b8dd1c0a8084846e4e",
         "android_client_info": {
           "package_name": "com.example.forum"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1011573538945-41o0ro4f4cqterf7e36d4u6itn0u9k4r.apps.googleusercontent.com",
+          "client_id": "525043231179-f5763cklb98nectlv5hr0r61h5c95s2t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDQv-3K0uwvkB4RwcpbuNqEWyCyyHq6GXg"
+          "current_key": "AIzaSyDGn4HVkhsMUysJaLbTA-LsVIdZUpFicY8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1011573538945-41o0ro4f4cqterf7e36d4u6itn0u9k4r.apps.googleusercontent.com",
+              "client_id": "525043231179-f5763cklb98nectlv5hr0r61h5c95s2t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
