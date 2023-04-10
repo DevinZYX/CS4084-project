@@ -44,7 +44,7 @@ public class forum extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //createPost();
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
     }
 
     public void createPost(){
@@ -182,5 +182,43 @@ public class forum extends AppCompatActivity{
                 }
             });
         }
+    }
+    public void register(View view){
+        View registerPage = getLayoutInflater().inflate(R.layout.activity_register, null);
+        EditText userView = findViewById(R.id.userName);
+        EditText passwordView = findViewById(R.id.password);
+        String userName = userView.getText().toString();
+        String password = passwordView.getText().toString();
+
+        if (userName.isEmpty()) {
+            userView.setError("Username cannot be empty.");
+        } else if (password.isEmpty()) {
+            passwordView.setError("Password cannot be empty");
+        } else {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference documentReference = db.document("user");
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            userView.setError("User Already Exists");
+                        }else{
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("password",password);
+                            db.collection("user").document(userName).set(map);
+                        }
+                    } else{
+                        Log.e("Failure","Something went wrong");
+                    }
+                }
+            });
+        }
+    }
+
+    public void redirctLogin(View view){
+        Intent intent = new Intent(this,login.class);
+        startActivity(intent);
     }
 }
