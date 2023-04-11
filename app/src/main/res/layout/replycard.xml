@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/example"
+    android:id="@+id/replyCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:maxHeight="300dp"
@@ -18,7 +18,7 @@
 
 
         <TextView
-            android:id="@+id/Forum_UserName"
+            android:id="@+id/Reply_UserName"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center_vertical"
@@ -31,7 +31,7 @@
 
 
         <TextView
-            android:id="@+id/Forum_Content"
+            android:id="@+id/Reply_Content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"

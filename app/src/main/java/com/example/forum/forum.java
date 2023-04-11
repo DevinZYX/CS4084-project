@@ -2,9 +2,6 @@ package com.example.forum;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,21 +27,16 @@ import java.util.List;
 import java.util.Map;
 
 public class forum extends AppCompatActivity{
-    private String userName;
-    private String title;
-    private String content;
     HashMap<String,String> dataToSave;
     private final String TITLE_KEY = "title";
     private final String CONTENT_KEY = "content";
 
     private final String USER_KEY = "userName";
-    public boolean isSuccess;
-    public String message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //createPost();
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.forum);
+        createPost();
     }
 
     public void createPost(){
@@ -62,7 +54,8 @@ public class forum extends AppCompatActivity{
                     String userName = map.get("userName").toString();
                     String title = map.get("title").toString();
                     String content = map.get("content").toString();
-                    createCard(userName,title,content);
+                    String id = document.getId();
+                    createCard(userName,title,content,id);
                     }
                 }
         }).addOnFailureListener(new OnFailureListener() {
@@ -113,10 +106,24 @@ public class forum extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()){
-                            popupWindow.dismiss();
-                            recreate();
-                        }else {
+                            String id = task.getResult().getId();
+                            DocumentReference document = db.collection("reply").document(id);
+                            document.set(new HashMap<String, Object>()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        popupWindow.dismiss();
+                                        recreate();
+                                    }else {
+                                        titleView.setError("Something went wrong");
+                                    }
+                                }
+                            });
 
+
+
+                        }else {
+                            titleView.setError("Something went wrong");
                         }
                     }
                 });
@@ -125,9 +132,9 @@ public class forum extends AppCompatActivity{
 
     }
 
-    public void createCard(String userName, String title, String content){
+    public void createCard(String userName, String title, String content, String id){
         LayoutInflater inflater = LayoutInflater.from(this);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.forum_linear);
+        LinearLayout linearLayout =  findViewById(R.id.forum_linear);
         CardView cardView = (CardView) inflater.inflate(R.layout.card, linearLayout, false);
         TextView userView = cardView.findViewById(R.id.Forum_UserName);
         TextView titleView = cardView.findViewById(R.id.Forum_Title);
@@ -138,87 +145,17 @@ public class forum extends AppCompatActivity{
         linearLayout.addView(cardView);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Log.v("","asdasdads");
+            public void onClick(View view) {
+                Intent intent = new Intent(forum.this, postpage.class);
+                intent.putExtra("userName",userName);
+                intent.putExtra("title",title);
+                intent.putExtra("content",content);
+                intent.putExtra("id",id);
+                startActivity(intent);
             }
         });
     }
-    public void redirctResgiter(View view){
-        Intent intent = new Intent(this,register.class);
-        startActivity(intent);
-    }
-    public void login(View view) {
-        View loginPage = getLayoutInflater().inflate(R.layout.activity_login, null);
-        EditText userView = findViewById(R.id.userName);
-        EditText passwordView = findViewById(R.id.password);
-        String userName = userView.getText().toString();
-        String password = passwordView.getText().toString();
 
-        if (userName.isEmpty()) {
-            userView.setError("Username cannot be empty.");
-        } else if (password.isEmpty()) {
-            passwordView.setError("Password cannot be empty");
-        } else {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = db.document("user/" + userName);
-            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Map<String, Object> map = new HashMap<>();
-                            map = document.getData();
-                            String db_password = map.get("password").toString();
-                            if ((!db_password.isEmpty()) && password.equals(db_password)) {
-                                Log.e("", "happy");
-                            }
-                        } else {
-                            userView.setError("User Does not Exist");
-                        }
-                    }else{
-                        Log.e("login","Something went wrong");
-                    }
-                }
-            });
-        }
-    }
-    public void register(View view){
-        View registerPage = getLayoutInflater().inflate(R.layout.activity_register, null);
-        EditText userView = findViewById(R.id.userName);
-        EditText passwordView = findViewById(R.id.password);
-        String userName = userView.getText().toString();
-        String password = passwordView.getText().toString();
 
-        if (userName.isEmpty()) {
-            userView.setError("Username cannot be empty.");
-        } else if (password.isEmpty()) {
-            passwordView.setError("Password cannot be empty");
-        } else {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = db.document("user");
-            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            userView.setError("User Already Exists");
-                        }else{
-                            Map<String, Object> map = new HashMap<>();
-                            map.put("password",password);
-                            db.collection("user").document(userName).set(map);
-                        }
-                    } else{
-                        Log.e("Failure","Something went wrong");
-                    }
-                }
-            });
-        }
-    }
 
-    public void redirctLogin(View view){
-        Intent intent = new Intent(this,login.class);
-        startActivity(intent);
-    }
 }
