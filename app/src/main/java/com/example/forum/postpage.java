@@ -35,7 +35,7 @@ public class postpage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getMessage();
+        getMessage();
         getSupportActionBar().setTitle("Post");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.postpage);

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/example"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxHeight="300dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:clickable="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/Forum_UserName"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:text="John Doe"
+            android:drawableLeft="@drawable/person"
+            android:textSize="20dp"
+            />
+
+        <TextView
+            android:id="@+id/Forum_Title"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="The Title of This Post"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
+
+
+        <TextView
+            android:id="@+id/Forum_Content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="hey"
+            android:ellipsize="end"
+            android:minLines="4"
+            android:maxLines="7"
+            android:textStyle="bold"
+            android:textColor="@color/background_gery"
+            android:textSize="16dp" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_delete_24"
+            android:backgroundTint="@color/red"
+            android:layout_gravity="right"
+            />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
