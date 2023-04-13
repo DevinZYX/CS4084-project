@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 
 public class forum extends AppCompatActivity{
+
+    private String userName = "john doe";
+
     HashMap<String,String> dataToSave;
     private final String TITLE_KEY = "title";
     private final String CONTENT_KEY = "content";
@@ -101,7 +104,7 @@ public class forum extends AppCompatActivity{
                 dataToSave = new HashMap<String, String>();
                 dataToSave.put(TITLE_KEY, title);
                 dataToSave.put(CONTENT_KEY, content);
-                dataToSave.put(USER_KEY, "John Doe");
+                dataToSave.put(USER_KEY, "john doe");
                 collectionReference.add(dataToSave).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -114,13 +117,16 @@ public class forum extends AppCompatActivity{
                                     if (task.isSuccessful()){
                                         popupWindow.dismiss();
                                         recreate();
+                                        DocumentReference documentReference = db.collection("user/"+userName+"/post").document(id);
+                                        Map<String,String> map = new HashMap<>();
+                                        map.put(TITLE_KEY, title);
+                                        map.put(CONTENT_KEY, content);
+                                        documentReference.set(map);
                                     }else {
                                         titleView.setError("Something went wrong");
                                     }
                                 }
                             });
-
-
 
                         }else {
                             titleView.setError("Something went wrong");
@@ -154,6 +160,12 @@ public class forum extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+    }
+
+    public void redirectMyPost(View view){
+        Intent intent = new Intent(forum.this, mypost.class);
+        intent.putExtra("userName",userName);
+        startActivity(intent);
     }
 
 

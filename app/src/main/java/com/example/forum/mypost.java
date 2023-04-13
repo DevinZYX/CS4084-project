@@ -7,10 +7,13 @@ import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,18 +35,20 @@ import java.util.Map;
 public class mypost extends AppCompatActivity {
 
     private String userName = "john doe";
-    private String title = "asdasd";
-    private String content = "asdad";
-    private String id = "1223";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("My post");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.mypost);
+        createMyPost();
     }
 
     public void createMyPost(){
-
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("user/"+userName+"/post");
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -53,8 +58,8 @@ public class mypost extends AppCompatActivity {
                 for (DocumentSnapshot document : documents) {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map = document.getData();
-                    String title1 = map.get("title").toString();
-                    String content1 = map.get("content").toString();
+                    String title = map.get("title").toString();
+                    String content = map.get("content").toString();
                     String id = document.getId();
                     createCard(title, content, id);
                 }
@@ -96,25 +101,43 @@ public class mypost extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference documentReference = db.document("user/"+userName+"/post/"+id);
-                documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                View puWindow = getLayoutInflater().inflate(R.layout.deletepopup, null);
+                PopupWindow popupWindow = new PopupWindow(puWindow, 1000, 596, true);
+                popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+                Button cancel = puWindow.findViewById(R.id.cancelBtn);
+                Button confirm = puWindow.findViewById(R.id.confirmBtn);
+                cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            recreate();
-                            DocumentReference documentReference1 = db.document("post/"+id);
-                            documentReference1.delete();
-                            DocumentReference documentReference2 = db.document("reply/"+id);
-                            documentReference2.delete();
-
-                        }else {
-
-                        }
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
                     }
                 });
-            }
+
+                confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference documentReference = db.document("user/"+userName+"/post/"+id);
+                        documentReference.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    recreate();
+                                    DocumentReference documentReference1 = db.document("post/"+id);
+                                    documentReference1.delete();
+                                    DocumentReference documentReference2 = db.document("reply/"+id);
+                                    documentReference2.delete();
+                                    popupWindow.dismiss();
+                                }else {
+
+                                }
+                            }
+                        });
+                    }
+                });
+                    }
         });
+
     }
 
 

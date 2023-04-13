@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popupWindow"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:background="@drawable/puwindow"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Alert"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/blue"
+        />
+
+    <TextView
+        android:background="@drawable/textarea"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:hint="Are you sure to delete the post?"
+        android:textSize="18dp"
+        android:layout_margin="5dp"
+        android:textColorHint="@color/black"
+        android:textStyle="bold"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/confirmBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="confirm"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:onClick="redirctLogin"
+        android:background="@drawable/postbtn"
+        />
+
+    <Button
+        android:id="@+id/cancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="115dp"
+        android:text="Cancel"
+        android:background="@drawable/postbtn"
+        android:onClick="redirctLogin"
+        />
+    </RelativeLayout>
+
+</LinearLayout>
