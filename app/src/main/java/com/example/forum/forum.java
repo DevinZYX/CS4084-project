@@ -3,10 +3,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +30,7 @@ import java.util.Map;
 
 public class forum extends AppCompatActivity{
 
-    private String userName = "john doe";
+    private String userName;
 
     HashMap<String,String> dataToSave;
     private final String TITLE_KEY = "title";
@@ -38,8 +40,35 @@ public class forum extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Forum");
+        userName = getUserName();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.forum);
         createPost();
+    }
+
+    public String getUserName(){
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+        return sharedPreferences.getString("userName", "");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(forum.this, MainActivity.class);
+        intent.putExtra("userName",userName);
+        startActivity(intent);
+        finish();
     }
 
     public void createPost(){
@@ -104,7 +133,7 @@ public class forum extends AppCompatActivity{
                 dataToSave = new HashMap<String, String>();
                 dataToSave.put(TITLE_KEY, title);
                 dataToSave.put(CONTENT_KEY, content);
-                dataToSave.put(USER_KEY, "john doe");
+                dataToSave.put(USER_KEY, userName);
                 collectionReference.add(dataToSave).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -164,7 +193,6 @@ public class forum extends AppCompatActivity{
 
     public void redirectMyPost(View view){
         Intent intent = new Intent(forum.this, mypost.class);
-        intent.putExtra("userName",userName);
         startActivity(intent);
     }
 

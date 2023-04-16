@@ -28,10 +28,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class postpage extends AppCompatActivity {
-    private String userName = "john doe";
-    private String title = "asdasd";
-    private String content = "asdad";
-    private String id = "1223";
+    private String userName;
+    private String title;
+    private String content;
+    private String id;
     private int length;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

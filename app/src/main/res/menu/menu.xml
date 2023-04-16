@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:title="Map"
+    android:id="@+id/map_btn"/>
+
+    <item
+        android:title="Timetable"
+        android:id="@+id/timetable_btn"/>
+
+    <item
+        android:title="Forum"
+        android:id="@+id/forum_btn"/>
+
+    <item
+        android:title="Friends"
+        android:id="@+id/friends_btn"/>
+
+
+
+</menu>

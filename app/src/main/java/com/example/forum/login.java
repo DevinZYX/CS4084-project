@@ -3,11 +3,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.google.android.gms.auth.api.identity.BeginSignInRequest;
+import com.google.android.gms.auth.api.identity.BeginSignInResult;
+import com.google.android.gms.auth.api.identity.Identity;
+import com.google.android.gms.auth.api.identity.SignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -19,6 +30,8 @@ import java.util.Map;
 public class login extends AppCompatActivity {
     public final String PASSWORD_KEY = "password";
     private String userName_pass;
+    private SignInClient oneTapClient;
+    private BeginSignInRequest signUpRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +63,13 @@ public class login extends AppCompatActivity {
                             String db_password = map.get("password").toString();
                             if ((!db_password.isEmpty()) && password.equals(db_password)) {
                                 userName_pass = userName;
-                                Log.e("", "happy");
+                                SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("userName", userName_pass);
+                                editor.apply();
+                                Intent intent = new Intent(login.this, MainActivity.class);
+                                intent.putExtra("userName",userName_pass);
+                                startActivity(intent);
                             }
                         } else {
                             userView.setError("User Does not Exist");
@@ -62,6 +81,7 @@ public class login extends AppCompatActivity {
             });
         }
     }
+
 
     public void redirctResgiter(View view){
         Intent intent = new Intent(this,register.class);

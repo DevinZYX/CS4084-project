@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/include3"
+        layout="@layout/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/home_menu"
+        android:layout_marginTop="680dp"/>
+    <com.smarteist.autoimageslider.SliderView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/image_slider"
+        android:layout_centerInParent="true"
+        app:sliderAnimationDuration="600"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="30dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderScrollTimeInSec="2"
+        app:sliderStartAutoCycle="true"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="53dp"
+        android:text="Welcome to University of Limerick"
+        android:textSize="20dp" />
+
+</RelativeLayout>
