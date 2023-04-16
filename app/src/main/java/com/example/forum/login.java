@@ -70,6 +70,8 @@ public class login extends AppCompatActivity {
                                 Intent intent = new Intent(login.this, MainActivity.class);
                                 intent.putExtra("userName",userName_pass);
                                 startActivity(intent);
+                            }else{
+                                passwordView.setError("password is wrong");
                             }
                         } else {
                             userView.setError("User Does not Exist");

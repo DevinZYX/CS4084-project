@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                     newView.setError("This field cannot be empty");
                 } else {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+                    userName = getUserName();
                     DocumentReference documentReference = db.document("user/" + userName);
                     documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override

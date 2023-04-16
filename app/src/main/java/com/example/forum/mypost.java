@@ -55,8 +55,6 @@ public class mypost extends AppCompatActivity {
 
 
     public void createMyPost(){
-        Intent intent = getIntent();
-        userName = intent.getStringExtra("userName");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference collectionReference = db.collection("user/"+userName+"/post");
         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
