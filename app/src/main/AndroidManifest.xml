@@ -32,7 +32,8 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".forum"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MapPage"
             android:exported="true"/>

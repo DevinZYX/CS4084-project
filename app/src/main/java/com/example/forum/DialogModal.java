@@ -72,7 +72,7 @@ public class DialogModal extends Activity {
                     return;
                 }
 
-                DBHelper dbHelper = new DBHelper(DialogModal.this, DB_NAME, null, 1);
+                com.example.forum.DBHelper dbHelper = new com.example.forum.DBHelper(DialogModal.this, DB_NAME, null, 1);
 
                 ContentValues contentValues = new ContentValues();
 
@@ -86,7 +86,7 @@ public class DialogModal extends Activity {
 
                 intent.setFlags(intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                intent.setClass(DialogModal.this, TimeTable.class);
+                intent.setClass(DialogModal.this, com.example.forum.TimeTable.class);
                 startActivity(intent);
             }
         });
@@ -94,7 +94,7 @@ public class DialogModal extends Activity {
 
     public String combineId(String day, String time) {
 
-        int day1 = utils.getDay(day);
+        int day1 = com.example.forum.utils.getDay(day);
 
 
         int time1 = Integer.parseInt(time.substring(0, 1));
@@ -102,7 +102,7 @@ public class DialogModal extends Activity {
         return String.valueOf((day1 - 1) * 5 + ((time1 - 1)/2 + 1));
     }
 
-    public void update(DBHelper dbHelper, ContentValues contentValues){
+    public void update(com.example.forum.DBHelper dbHelper, ContentValues contentValues){
 
         String []a = {contentValues.get("c_id").toString()};
 

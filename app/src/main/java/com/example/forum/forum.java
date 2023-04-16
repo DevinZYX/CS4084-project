@@ -52,24 +52,6 @@ public class forum extends AppCompatActivity{
         return sharedPreferences.getString("userName", "");
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(forum.this, MainActivity.class);
-        intent.putExtra("userName",userName);
-        startActivity(intent);
-        finish();
-    }
 
     public void createPost(){
         //Create a Forum Page withing reading data from firebase

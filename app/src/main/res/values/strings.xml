@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UL Guide</string>
+    <string name="app_name">ULguide</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="register"><u>Register</u></string>
     <string name="login"><u>Login</u></string>
