@@ -5,6 +5,8 @@
 * Zhongjun Xiang - 22156453
 * Yingfang Li - 22393692
 * Cheng Zhang - 22396373
+* WenWei Wan	- 22156461
+
 
 ## Running Environment
   Suggest to run this application with Pixel 3 Tiramisu Api 33 Android 13
